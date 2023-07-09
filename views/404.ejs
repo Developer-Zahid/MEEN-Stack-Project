@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEEN Project | <%= pageTitle %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        a{
+            text-decoration: none;
+        }
+        body{
+            font-weight: 400;
+        }
+        .banner__title{
+            font-size: max(2rem, 4vw);
+            font-weight: 800;
+            text-shadow: 0.1em 0.1em 0 #27374D;
+            margin-block-end: 2rem;
+        }
+        .navbar,
+        .banner
+        {
+            text-align: center;
+        }
+        .navbar{
+            display: flex;
+            justify-content: center;
+            padding-inline: 15px;
+            background-color: #526D82;
+        }
+        .navbar__link{
+            color: #ffffff;
+            padding: 1rem;
+        }
+        .navbar__link:is(:hover, :focus-visible){
+            background-color: #27374D;
+        }
+        .banner{
+            padding-block: 5rem;
+            color: #ffffff;
+            background-color: #9DB2BF;
+        }
+        .btn{
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            background-color: #526D82;
+            border: 2px solid #27374D;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .btn:is(:hover, :focus-visible){
+            background-color: #27374D;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar__link">All Blogs</a>
+        <a href="/create" class="navbar__link">Create Blog</a>
+    </nav>
+    <header class="banner">
+        <h1 class="banner__title">Page Not Found</h1>
+        <a href="/" class="btn">Go to Home page</a>
+    </header>
+</body>
+</html>
