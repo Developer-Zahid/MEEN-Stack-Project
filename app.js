@@ -1,17 +1,34 @@
 const express = require('express')
+const mongoose =  require('mongoose')
+require('dotenv').config()
 
 // express app
 const app = express()
 
+// connect to mongodb
+const dbURI = process.env.DB_URI
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+.then((result)=>{
+    console.log('Connected to db')
+    // listen for requests
+    app.listen(3000)
+})
+.catch((err)=> console.log(err));
+
 // register view engine
 app.set('view engine', 'ejs')
-
-// listen for requests
-app.listen(3000)
 
 // app.get('/', (req, res)=>{
 //     res.sendFile('/views/index.html', {root: __dirname})
 // })
+
+// Middleware & static files
+app.use(express.static('public'))
+
+app.use((req, res, next)=>{
+    console.log("Run Middleware")
+    next()
+})
 
 app.get('/', (req, res)=>{
     res.render('index', {

@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+body{
+    font-weight: 400;
+}
+.banner__title,
+.banner__text
+{
+    color: #ffffff;
+}
+.banner__title{
+    font-size: max(2rem, 4vw);
+    font-weight: 800;
+    text-shadow: 0.1em 0.1em 0 #27374D;
+}
+.banner__text{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-block: 1rem;
+    max-width: 600px;
+    margin-inline: auto;
+}
+.blog__title{
+    font-weight: 600;
+}
+.navbar,
+.banner
+{
+    text-align: center;
+}
+.navbar{
+    display: flex;
+    justify-content: center;
+    padding-inline: 15px;
+    background-color: #526D82;
+}
+.navbar__link{
+    color: #ffffff;
+    padding: 1rem;
+}
+.navbar__link:is(:hover, :focus-visible){
+    background-color: #27374D;
+}
+.banner{
+    padding-block: 5rem;
+    background-color: #9DB2BF;
+}
+.container{
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1140px;
+}
+.blog{
+    display: block;
+    padding: 1rem;
+    margin: 1rem;
+    color: #27374D;
+    background-color: #DDE6ED;
+    border-left: 5px solid currentColor;
+}
+.btn{
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #526D82;
+    border: 2px solid #27374D;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: inline-block;
+}
+.btn:is(:hover, :focus-visible){
+    background-color: #27374D;
+}
