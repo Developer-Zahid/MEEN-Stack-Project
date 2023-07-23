@@ -34,11 +34,11 @@ body{
 .banner
 {
     text-align: center;
+    padding-inline: 15px;
 }
 .navbar{
     display: flex;
     justify-content: center;
-    padding-inline: 15px;
     background-color: #526D82;
 }
 .navbar__link{

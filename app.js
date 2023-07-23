@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose =  require('mongoose')
+const Blog = require('./models/blog')
 require('dotenv').config()
 
 // express app
@@ -24,29 +25,37 @@ app.set('view engine', 'ejs')
 
 // Middleware & static files
 app.use(express.static('public'))
+app.use(express.urlencoded({extended: true}))
 
 app.use((req, res, next)=>{
     console.log("Run Middleware")
     next()
 })
 
+app.get('/add-blog', (req, res)=>{
+    const blog = new Blog({
+        title: 'My First Blog Title',
+        description: 'My First Blog Description'
+    })
+    blog.save()
+    .then((result)=>{
+        res.send(result)
+    })
+    .catch((err)=>{
+        console.error(err)
+    })
+})
+
 app.get('/', (req, res)=>{
-    res.render('index', {
-        pageTitle: 'Home',
-        blogs: [
-            {
-                title: 'New Blog 1',
-                description: '1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, neque.'
-            },
-            {
-                title: 'New Blog 2',
-                description: '2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, neque.'
-            },
-            {
-                title: 'New Blog 3',
-                description: '3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, neque.'
-            }
-        ]
+    Blog.find().sort({createdAt: -1})
+    .then((result)=>{
+        res.render('index', {
+            pageTitle: 'Home',
+            blogs: result
+        })
+    })
+    .catch((err)=>{
+        console.error(err)
     })
 })
 
@@ -56,9 +65,42 @@ app.get('/create', (req, res)=>{
     })
 })
 
-app.get('/details', (req, res)=>{
-    res.render('details', {
-        pageTitle: 'Blog Details'
+app.post('/create-blog', (req, res)=>{
+    const blog = new Blog(req.body)
+    blog.save()
+    .then((result)=>{
+        res.redirect('/')
+    })
+    .catch((err)=>{
+        console.error(err)
+    })
+})
+
+app.get('/details/:id', (req, res)=>{
+    const id = req.params.id
+    Blog.findById(id)
+    .then((result)=>{
+        res.render('details', {
+            pageTitle: 'Blog Details',
+            blog: result
+        })
+    })
+    .catch((err)=>{
+        res.status(404).render('404', {
+            pageTitle: '404'
+        })
+        console.error(err)
+    })
+})
+
+app.delete('/delete-blog/:id', (req, res)=>{
+    const id = req.params.id
+    Blog.findByIdAndDelete(id)
+    .then((result)=>{
+        res.json({redirect: '/'})
+    })
+    .catch((err)=>{
+        console.error(err)
     })
 })
 

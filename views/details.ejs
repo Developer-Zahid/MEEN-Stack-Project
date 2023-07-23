@@ -6,11 +6,25 @@
 <body>
     <%- include('./layout/navbar') %>
     <header class="banner">
-        <h1 class="banner__title">This is <%= pageTitle %> page</h1>
-        <p class="banner__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore distinctio aut quod? Consequuntur assumenda dolorem velit sint nulla blanditiis nesciunt?</p>
-        <form action="#!">
-            <button type="submit" class="btn">Delete</button>
-        </form>
+        <h1 class="banner__title"><%= blog.title %></h1>
+        <p class="banner__text"><%= blog.description %></p>
+        <button type="button" data-action="/delete-blog/<%= blog._id %>" class="btn">Delete</button>
     </header>
+
+    <script>
+        const deleteBtn = document.querySelector('.btn')
+        deleteBtn.addEventListener('click', function(){
+            fetch(this.dataset.action, {
+                method: 'DELETE'
+            })
+            .then((res)=> res.json())
+            .then((result)=> {
+                window.location.href = result.redirect
+            })
+            .catch((err)=>{
+                console.error(err)
+            })
+        })
+    </script>
 </body>
 </html>
